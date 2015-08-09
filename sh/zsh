@@ -1,0 +1,14 @@
+#!/bin/bash
+
+setup_zsh() {
+  title "ZSH"
+  case "$SHELL" in
+    */zsh)
+      info "Using zsh as the default shell."
+      ;;
+    *)
+      info "Changing the default shell to zsh..."
+        chsh -s "$(which zsh)"
+      ;;
+  esac
+}

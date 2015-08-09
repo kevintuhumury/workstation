@@ -5,6 +5,7 @@ set -e
 source 'sh/configuration'
 source 'sh/formatting'
 source 'sh/homebrew'
+source 'sh/zsh'
 
 hello() {
   title "Welcome"
@@ -58,6 +59,8 @@ setup() {
   brew_force_link "openssl"
   brew_force_launchctl_restart "postgres"
   brew_force_launchctl_restart "redis"
+
+  setup_zsh
 
   goodbye
 }
