@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+source 'sh/configuration'
+source 'sh/formatting'
+
+hello() {
+  title "Welcome"
+
+  info "This setup will provision your OS X %s workstation. It consists out of the following steps:\n\n" $(sw_vers -productVersion)
+  info "  1. Install, update and configure Homebrew."
+  info "  2. Install or upgrade the Homebrew formulas."
+  info "  3. Configure zsh as the default shell."
+  info "  4. Install RVM."
+  info "  5. Install the configured Rubies and set %s as the default version." $DEFAULT_RUBY_VERSION
+  info "  6. Install Bundler and upgrade to the latest Rubygems version."
+  info "  7. Install Homebrew Cask."
+  info "  8. Install or upgrade the list of OS X applications using Homebrew Cask."
+  info "  9. Run any setup from %s." $LOCAL_WORKSTATION_CONFIGURATION
+  info "For more information see the README."
+
+  confirm
+}
+
+confirm() {
+  read -p "   Do you want to continue? (y/N) " response
+  if [[ ! $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    fail "Quitter!"
+    exit
+  fi
+}
+
+goodbye() {
+  info "Your OS X %s workstation has been provisioned." $(sw_vers -productVersion)
+}
+
+setup() {
+  hello
+
+  goodbye
+}
+
+setup
+
+if [ -f $LOCAL_WORKSTATION_CONFIGURATION ]; then
+  . $LOCAL_WORKSTATION_CONFIGURATION
+fi
