@@ -1,0 +1,19 @@
+#!/bin/bash
+
+info() {
+  local text=$1; shift
+
+  if [ $# -ge 1 ]; then
+    text=$(printf "$text" $@)
+  fi
+
+  echo -e "\033[0;36m   $text\033[0m"
+}
+
+fail() {
+  echo -e "\033[1;31m   $1\033[0m"
+}
+
+title() {
+  echo -e "\033[0;34m>> \033[1;39m$1\033[0m"
+}
