@@ -1,0 +1,9 @@
+#!/bin/bash
+
+setup_rubygems() {
+  title "Rubygems"
+
+  info "Updating Rubygems..."
+  gem update --system
+  success "Rubygems has been updated."
+}
