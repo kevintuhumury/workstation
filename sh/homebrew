@@ -19,11 +19,6 @@ install_homebrew() {
   fi
 }
 
-update_homebrew() {
-  info "Updating Homebrew formulas..."
-  brew update
-}
-
 configure_path() {
   found_path=$(echo $PATH | grep -o -E -m1 $HOMEBREW_PATH | head -1)
 
@@ -31,4 +26,59 @@ configure_path() {
     echo "# added by workstation setup" >> "$HOME/.zshrc"
     echo 'export PATH="$HOMEBREW_PATH:$PATH"' >> "$HOME/.zshrc"
   fi
+}
+
+update_homebrew() {
+  info "Updating Homebrew formulas..."
+  brew update
+}
+
+brew_install_or_upgrade() {
+  if brew_is_installed "$1"; then
+    if brew_is_upgradable "$1"; then
+      info "Upgrading %s..." "$1"
+      brew upgrade "$@"
+    else
+      info "Already using the latest version of %s. Skipping..." "$1"
+    fi
+  else
+    info "Installing %s..." "$1"
+    brew install "$@"
+  fi
+}
+
+brew_is_installed() {
+  local name="$(brew_formula_alias "$1")"
+
+  brew list -1 | grep -Fqx "$name"
+}
+
+brew_is_upgradable() {
+  local name="$(brew_formula_alias "$1")"
+
+  ! brew outdated --quiet "$name" >/dev/null
+}
+
+brew_force_link() {
+  brew unlink "$1" && brew link "$@" --force
+}
+
+brew_force_launchctl_restart() {
+  local name="$(brew_formula_alias "$1")"
+  local domain="homebrew.mxcl.$name"
+  local plist="$domain.plist"
+
+  fancy_echo "Restarting %s..." "$1"
+  mkdir -p "$HOME/Library/LaunchAgents"
+  ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
+
+  if launchctl list | grep -Fq "$domain"; then
+    launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
+  fi
+
+  launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
+}
+
+brew_formula_alias() {
+  brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/:/, ""); print $1}'
 }
