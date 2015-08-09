@@ -15,7 +15,13 @@ fail() {
 }
 
 success() {
-  echo -e "\033[1;32m   $1\033[0m"
+  local text=$1; shift
+
+  if [ $# -ge 1 ]; then
+    text=$(printf "$text" $@)
+  fi
+
+  echo -e "\033[1;32m   $text\033[0m"
 }
 
 title() {

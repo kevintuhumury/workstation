@@ -6,6 +6,7 @@ source 'sh/configuration'
 source 'sh/formatting'
 source 'sh/homebrew'
 source 'sh/zsh'
+source 'sh/rvm'
 
 hello() {
   title "Welcome"
@@ -62,6 +63,7 @@ setup() {
 
   setup_zsh
 
+  setup_rvm
   goodbye
 }
 

@@ -1,0 +1,58 @@
+#!/bin/bash
+
+setup_rvm() {
+  title "RVM"
+
+  install_rvm
+  install_rvm_requirements
+
+  rvm_configure_as_function
+  rvm_install_rubies ${RUBY_VERSIONS[*]}
+  rvm_configure_default_ruby $DEFAULT_RUBY_VERSION
+}
+
+install_rvm() {
+  if ! command -v rvm &>/dev/null; then
+    info "Installing RVM..."
+    \curl -sSL https://get.rvm.io | bash -s stable
+    success "RVM has been installed."
+  else
+    info "RVM has already been installed. Skipping..."
+  fi
+}
+
+install_rvm_requirements() {
+  info "Installing RVM requirements..."
+  rvm requirements
+  success "RVM requirements have been installed."
+}
+
+rvm_install_rubies() {
+  ruby_versions=$@
+
+  for ruby_version in $ruby_versions; do
+    rvm_install $ruby_version
+  done
+}
+
+rvm_install() {
+  if rvm list | grep -Fq "$1"; then
+    info "Ruby version %s has already been installed." $1
+  else
+    info "Installing Ruby version %s." $1
+    rvm install "$@"
+    success "Ruby version %s has been installed." $1
+  fi
+}
+
+rvm_configure_as_function() {
+  info "Configuring RVM as a function..."
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+  success "RVM has been configured as a function."
+}
+
+rvm_configure_default_ruby() {
+  info "Configuring Ruby version %s as the default..." $1
+  rvm use "$@" --default
+  success "Ruby version %s is configured as the default." $1
+}
