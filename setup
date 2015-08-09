@@ -8,6 +8,7 @@ source 'sh/homebrew'
 source 'sh/zsh'
 source 'sh/rvm'
 source 'sh/rubygems'
+source 'sh/bundler'
 
 hello() {
   title "Welcome"
@@ -66,6 +67,8 @@ setup() {
 
   setup_rvm
   setup_rubygems
+  setup_bundler
+
   goodbye
 }
 

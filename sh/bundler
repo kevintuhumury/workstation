@@ -1,0 +1,22 @@
+#!/bin/bash
+
+setup_bundler() {
+  title "Bundler"
+
+  install_bundler
+  configure_bundler_for_multiple_cores
+}
+
+install_bundler() {
+  info "Installing Bundler..."
+  gem install bundler
+  success "Bundler has been installed."
+}
+
+configure_bundler_for_multiple_cores() {
+  number_of_cores=$(sysctl -n hw.ncpu)
+
+  info "Configuring Bundler for multiple cores..."
+  bundle config --global jobs $((number_of_cores - 1))
+  success "Bundler has been configured for multiple cores."
+}
