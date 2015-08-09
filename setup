@@ -33,6 +33,7 @@ confirm() {
 
 goodbye() {
   info "Your OS X %s workstation has been provisioned." $(sw_vers -productVersion)
+  success "Systems ready."
 }
 
 setup() {
