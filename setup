@@ -4,6 +4,7 @@ set -e
 
 source 'sh/configuration'
 source 'sh/formatting'
+source 'sh/homebrew'
 
 hello() {
   title "Welcome"
@@ -38,6 +39,8 @@ goodbye() {
 
 setup() {
   hello
+
+  setup_homebrew
 
   goodbye
 }

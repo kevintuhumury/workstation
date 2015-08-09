@@ -1,0 +1,34 @@
+#!/bin/bash
+
+setup_homebrew() {
+  title "Homebrew"
+
+  install_homebrew
+  update_homebrew
+}
+
+install_homebrew() {
+  if ! command -v brew &>/dev/null; then
+    info "Installing Homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    configure_path
+    success "Homebrew has been installed."
+  else
+    info "Homebrew has already been installed. Skipping..."
+  fi
+}
+
+update_homebrew() {
+  info "Updating Homebrew formulas..."
+  brew update
+}
+
+configure_path() {
+  found_path=$(echo $PATH | grep -o -E -m1 $HOMEBREW_PATH | head -1)
+
+  if [[ ! $found_path == $HOMEBREW_PATH ]]; then
+    echo "# added by workstation setup" >> "$HOME/.zshrc"
+    echo 'export PATH="$HOMEBREW_PATH:$PATH"' >> "$HOME/.zshrc"
+  fi
+}
