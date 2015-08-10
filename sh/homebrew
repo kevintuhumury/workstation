@@ -10,7 +10,7 @@ setup_homebrew() {
 install_homebrew() {
   if ! command -v brew &>/dev/null; then
     info "Installing Homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ruby -e "$(curl --fail --silent --show-error --location https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
     configure_path
     success "Homebrew has been installed."
@@ -34,23 +34,25 @@ update_homebrew() {
 }
 
 brew_install_or_upgrade() {
-  if brew_is_installed "$1"; then
-    if brew_is_upgradable "$1"; then
-      info "Upgrading %s..." "$1"
-      brew upgrade "$@"
+  local formula="$1"
+
+  if brew_is_installed "$formula"; then
+    if brew_is_upgradable "$formula"; then
+      info "Upgrading %s..." "$formula"
+      brew upgrade "$formula"
     else
-      info "Already using the latest version of %s. Skipping..." "$1"
+      info "Already using the latest version of %s. Skipping..." "$formula"
     fi
   else
-    info "Installing %s..." "$1"
-    brew install "$@"
+    info "Installing %s..." "$formula"
+    brew install "$formula"
   fi
 }
 
 brew_is_installed() {
   local name="$(brew_formula_alias "$1")"
 
-  brew list -1 | grep -Fqx "$name"
+  brew list -1 | grep --fixed-strings --quiet --line-regexp "$name"
 }
 
 brew_is_upgradable() {
@@ -60,7 +62,7 @@ brew_is_upgradable() {
 }
 
 brew_force_link() {
-  brew unlink "$1" && brew link "$@" --force
+  brew unlink "$1" && brew link "$1" --force
 }
 
 brew_force_launchctl_restart() {
@@ -68,11 +70,11 @@ brew_force_launchctl_restart() {
   local domain="homebrew.mxcl.$name"
   local plist="$domain.plist"
 
-  fancy_echo "Restarting %s..." "$1"
+  info "Restarting %s..." "$name"
   mkdir -p "$HOME/Library/LaunchAgents"
   ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
 
-  if launchctl list | grep -Fq "$domain"; then
+  if launchctl list | grep --fixed-strings --quiet "$domain"; then
     launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
   fi
 

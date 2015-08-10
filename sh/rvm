@@ -14,7 +14,7 @@ setup_rvm() {
 install_rvm() {
   if ! command -v rvm &>/dev/null; then
     info "Installing RVM..."
-    \curl -sSL https://get.rvm.io | bash -s stable
+    \curl --silent --show-error --location https://get.rvm.io | bash -s stable
     success "RVM has been installed."
   else
     info "RVM has already been installed. Skipping..."
@@ -36,12 +36,14 @@ rvm_install_rubies() {
 }
 
 rvm_install() {
-  if rvm list | grep -Fq "$1"; then
-    info "Ruby version %s has already been installed." $1
+  local ruby_version="$1"
+
+  if rvm list | grep --fixed-strings --quiet "$ruby_version"; then
+    info "Ruby version %s has already been installed." "$ruby_version"
   else
-    info "Installing Ruby version %s." $1
-    rvm install "$@"
-    success "Ruby version %s has been installed." $1
+    info "Installing Ruby version %s." "$ruby_version"
+    rvm install "$ruby_version"
+    success "Ruby version %s has been installed." "$ruby_version"
   fi
 }
 
@@ -52,7 +54,9 @@ rvm_configure_as_function() {
 }
 
 rvm_configure_default_ruby() {
-  info "Configuring Ruby version %s as the default..." $1
-  rvm use "$@" --default
-  success "Ruby version %s is configured as the default." $1
+  local ruby_version="$1"
+
+  info "Configuring Ruby version %s as the default..." "$ruby_version"
+  rvm use "$ruby_version" --default
+  success "Ruby version %s is configured as the default." "$ruby_version"
 }

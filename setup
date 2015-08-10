@@ -2,13 +2,13 @@
 
 set -e
 
-source 'sh/configuration'
-source 'sh/formatting'
-source 'sh/homebrew'
-source 'sh/zsh'
-source 'sh/rvm'
-source 'sh/rubygems'
-source 'sh/bundler'
+source "sh/configuration"
+source "sh/formatting"
+source "sh/homebrew"
+source "sh/zsh"
+source "sh/rvm"
+source "sh/rubygems"
+source "sh/bundler"
 
 hello() {
   title "Welcome"

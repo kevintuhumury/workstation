@@ -2,6 +2,7 @@
 
 setup_zsh() {
   title "ZSH"
+
   case "$SHELL" in
     */zsh)
       info "Using zsh as the default shell."
