@@ -12,19 +12,15 @@ install_homebrew() {
     info "Installing Homebrew..."
     ruby -e "$(curl --fail --silent --show-error --location https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-    configure_path
+    add_to_zshrc "# added by workstation setup"
+    add_to_zshrc 'export PATH="$HOMEBREW_PATH:$PATH"'
+    export PATH="$HOMEBREW_PATH:$PATH"
+
+    brew doctor
+
     success "Homebrew has been installed."
   else
     info "Homebrew has already been installed. Skipping..."
-  fi
-}
-
-configure_path() {
-  found_path=$(echo $PATH | grep -o -E -m1 $HOMEBREW_PATH | head -1)
-
-  if [[ ! $found_path == $HOMEBREW_PATH ]]; then
-    echo "# added by workstation setup" >> "$HOME/.zshrc"
-    echo 'export PATH="$HOMEBREW_PATH:$PATH"' >> "$HOME/.zshrc"
   fi
 }
 

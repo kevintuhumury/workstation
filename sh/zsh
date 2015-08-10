@@ -13,3 +13,9 @@ setup_zsh() {
       ;;
   esac
 }
+
+add_to_zshrc() {
+  if ! grep --quiet "$1" "$HOME/.zshrc"; then
+    echo "$1" >> "$HOME/.zshrc"
+  fi
+}
