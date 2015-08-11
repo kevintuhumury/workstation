@@ -51,16 +51,14 @@ setup() {
 
   brew_install_or_upgrade "zsh"
   brew_install_or_upgrade "git"
+  brew_install_or_upgrade "ack"
   brew_install_or_upgrade "macvim"
   brew_install_or_upgrade "postgres"
   brew_install_or_upgrade "sqlite"
   brew_install_or_upgrade "redis"
-  brew_install_or_upgrade "ack"
-  brew_install_or_upgrade "wget"
   brew_install_or_upgrade "openssl"
-  brew_install_or_upgrade "libyaml"
   brew_install_or_upgrade "imagemagick"
-  brew_install_or_upgrade "readline"
+  brew_install_or_upgrade "qt"
 
   brew_force_link "openssl"
   brew_force_launchctl_restart "postgres"
