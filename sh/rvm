@@ -4,9 +4,9 @@ setup_rvm() {
   title "RVM"
 
   install_rvm
+  rvm_configure_as_function
   install_rvm_requirements
 
-  rvm_configure_as_function
   rvm_install_rubies ${RUBY_VERSIONS[*]}
   rvm_configure_default_ruby $DEFAULT_RUBY_VERSION
 }
