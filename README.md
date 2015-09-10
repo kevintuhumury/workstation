@@ -3,6 +3,16 @@ Easily provision your OS X workstation into a development machine.
 
 The setup can be run multiple times on the same machine safely. It installs, upgrades, or skips packages based on what is already installed on the machine.
 
+## Requirements
+
+Make sure you've installed (and agreed with the terms of) XCode or the XCode Command Line Tools with:
+
+``` bash
+xcode-select --install
+```
+
+When installing `gcc` (you'll at least need it for RVM) using Homebrew it is recommended that you do install the Command Line Tools (even if you've already installed XCode). It will install a _bottled_ (read: precompiled) version, which is very fast and speeds up the workstation setup.
+
 ## Installation
 
 Run the following to provision your OS X workstation:
