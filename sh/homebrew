@@ -12,10 +12,6 @@ install_homebrew() {
     info "Installing Homebrew..."
     ruby -e "$(curl --fail --silent --show-error --location https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-    add_to_zshrc "# added by workstation setup"
-    add_to_zshrc 'export PATH="$HOMEBREW_PATH:$PATH"'
-    export PATH="$HOMEBREW_PATH:$PATH"
-
     brew doctor
 
     success "Homebrew has been installed."
