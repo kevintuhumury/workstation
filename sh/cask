@@ -12,7 +12,7 @@ cask_install_or_upgrade() {
 }
 
 cask_is_installed() {
-  local name=$(brew_cask_alias "$1")
+  local name=$(cask_alias "$1")
 
   brew cask list -1 | grep --fixed-strings --quiet --line-regexp "$name"
 }
