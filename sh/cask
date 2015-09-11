@@ -4,7 +4,7 @@ cask_install_or_upgrade() {
   local cask="$1"
 
   if cask_is_installed "$cask"; then
-    info "Cask %s has already been installed. Skipping..."
+    info "Cask %s has already been installed. Skipping..." "$cask"
   else
     info "Installing %s..." "$cask"
     brew cask install "$cask"
