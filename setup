@@ -77,6 +77,7 @@ setup() {
   cask_install_or_upgrade "alfred"
   cask_install_or_upgrade "appcleaner"
   cask_install_or_upgrade "coconutbattery"
+  cask_install_or_upgrade "colorpicker-hex"
   cask_install_or_upgrade "daisydisk"
   cask_install_or_upgrade "dropbox"
   cask_install_or_upgrade "evernote"
