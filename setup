@@ -72,6 +72,7 @@ setup() {
 
   brew tap "caskroom/cask"
   brew_install_or_upgrade "brew-cask"
+  cask_install_or_upgrade "google-chrome"
   cask_install_or_upgrade "1password"
   cask_install_or_upgrade "alfred"
   cask_install_or_upgrade "appcleaner"
