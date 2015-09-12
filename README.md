@@ -55,6 +55,8 @@ If you want to setup an even better development machine, you can also use my [OS
     - [f.lux](https://justgetflux.com/)
     - [Github Pulse](https://github.com/tadeuzagallo/GithubPulse)
     - [GitX](http://rowanj.github.io/gitx/) (by rowanj)
+    - [Google Chrome](http://www.google.com/chrome/)
+    - [Hex Color Picker](http://wafflesoftware.net/hexpicker/)
     - [HipChat](https://www.hipchat.com/)
     - [iTerm 2](https://www.iterm2.com/)
     - [Karabiner](https://pqrs.org/osx/karabiner/)
