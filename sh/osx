@@ -3,7 +3,54 @@
 setup_osx() {
   title "OS X Settings"
 
+  # General
+
+  info "Setting the appearance for buttons, menus and windows to Graphite..."
+  defaults write NSGlobalDomain AppleAquaColorVariant -int 6
+
+  info "Enabling apps to close their windows when quitting..."
+  defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+
+  # Finder
+
+  info "Setting %s as the default location for new Finder windows..." $DEFAULT_FINDER_LOCATION
+  defaults write com.apple.finder NewWindowTarget -string "PfLo"
+  defaults write com.apple.finder NewWindowTargetPath -string "file://${DEFAULT_FINDER_LOCATION}"
+
+  info "Enabling Column View as the default view type for all Finder windows..."
+  defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+  info "Enabling text selection in Quick Look..."
+  defaults write com.apple.finder QLEnableTextSelection -bool true
+
+  info "Disabling the creation of .DS_Store files on network volumes..."
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+  # Screenshots
+
   info "Setting the default screencapture location to %s..." $DEFAULT_SCREENCAPTURE_LOCATION
   defaults write com.apple.screencapture location $DEFAULT_SCREENCAPTURE_LOCATION
+
+  # Screensaver
+
+  info "Enabling the bottom left hot corner to start the screen saver"
+  defaults write com.apple.dock wvous-bl-corner -int 5
+
+  info "Enabling immediate password requirement after sleep or screen saver"
+  defaults write com.apple.screensaver askForPassword -int 1
+  defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+  # Other
+
+  info "Enabling the printer app to quit once the print jobs are complete..."
+  defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+  # Clean up
+
+  info "Killing affected applications..."
+  for app in "cfprefsd" "Finder" "Dock" "SystemUIServer"; do
+    killall "$app" > /dev/null 2>&1
+  done
+
   success "OS X specific settings have been set."
 }
