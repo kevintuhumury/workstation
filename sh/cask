@@ -7,7 +7,7 @@ cask_install_or_upgrade() {
     info "Cask %s has already been installed. Skipping..." "$cask"
   else
     info "Installing %s..." "$cask"
-    brew cask install "$cask"
+    brew cask install "$cask" --appdir=/Applications
   fi
 }
 
