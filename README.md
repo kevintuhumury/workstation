@@ -33,12 +33,7 @@ If you want to setup an even better development machine, you can also use my [OS
     - [Git](https://git-scm.com/)
     - [Ack](http://beyondgrep.com/)
     - [MacVim](https://github.com/b4winckler/macvim)
-    - [Postgres](http://www.postgresql.org/)
-    - [SQLite](https://www.sqlite.org/)
-    - [Redis](http://redis.io/)
     - [OpenSSL](https://www.openssl.org/)
-    - [ImageMagick](http://www.imagemagick.org/)
-    - [QT](http://www.qt.io/developers/)
 3. Configure ZSH as the default shell.
 4. Install [RVM](https://rvm.io/).
 5. Install the configured Rubies and set the default version.
@@ -46,21 +41,16 @@ If you want to setup an even better development machine, you can also use my [OS
 7. Install [Homebrew Cask](http://caskroom.io/).
 8. Install or upgrade the list of OS X applications using Homebrew Cask:
     - [1password](https://agilebits.com/onepassword)
-    - [Alfred](https://www.alfredapp.com/)
     - [AppCleaner](http://www.freemacsoft.net/appcleaner/)
     - [coconutBattery](http://www.coconut-flavour.com/coconutbattery/)
     - [DaisyDisk](http://www.daisydiskapp.com/)
     - [Dropbox](https://www.dropbox.com/)
-    - [Evernote](https://evernote.com/)
     - [f.lux](https://justgetflux.com/)
-    - [Github Pulse](https://github.com/tadeuzagallo/GithubPulse)
     - [GitX](http://rowanj.github.io/gitx/) (by rowanj)
     - [Google Chrome](http://www.google.com/chrome/)
     - [Hex Color Picker](http://wafflesoftware.net/hexpicker/)
     - [HipChat](https://www.hipchat.com/)
     - [iTerm 2](https://www.iterm2.com/)
-    - [Karabiner](https://pqrs.org/osx/karabiner/)
-    - [Mou](http://25.io/mou/)
     - [Slack](https://slack.com/)
     - [Spectacle](http://spectacleapp.com/)
     - [Spotify](https://www.spotify.com/)
